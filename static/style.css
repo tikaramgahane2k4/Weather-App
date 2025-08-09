@@ -1,0 +1,206 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* BODY */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #38a3d1);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+
+/* Neumorphism Card */
+.neumorphism-card {
+    background: #1f4068; /* गहरा नीला */
+    border-radius: 20px;
+    box-shadow: 8px 8px 16px #142645, -8px -8px 16px #2c5aa0;
+    padding: 1.5rem;
+    color: #ffffff;
+}
+
+/* Title */
+.app-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+/* Search Form */
+.search-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-form-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: #f0f4ff;
+    color: #333;
+    box-shadow: inset 4px 4px 8px #b8c6db, inset -4px -4px 8px #ffffff;
+}
+
+.search-form-button {
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    background: #ff8c42; /* ऑरेंज */
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-form-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 12px #b8c6db, -6px -6px 12px #ffffff;
+}
+
+/* Weather Display */
+.weather-display {
+    text-align: center;
+    animation: fadeInUp 0.8s ease;
+}
+
+.city-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.weather-icon {
+    width: 100px;
+    height: 100px;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.temperature {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    padding: 1rem;
+    border-radius: 15px;
+    text-align: center;
+    background: #27496d;
+    color: white;
+}
+
+.stat-item i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.label {
+    font-size: 0.9rem;
+    color: #ffd700; /* सुनहरा */
+}
+
+.value {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Error */
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .app-title {
+        font-size: 1.5rem;
+    }
+    .temperature {
+        font-size: 2rem;
+    }
+    .weather-icon {
+        width: 80px;
+        height: 80px;
+    }
+    .search-form-input{
+        height: 50px;
+    }
+    .search-form-button{
+        height: 50px;
+    }
+    button i{
+        margin-top: -1rem;
+        
+    }
+}
+@media (max-width: 460px) {
+    .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    }
+    .search-form-input{
+        height: 50px;
+    }
+    .search-form-button{
+        height: 50px;
+    }
+    button i{
+        margin-top: -1rem;
+        
+    }
+}
+@media (max-width: 430px) {
+    .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container neumorphism-card">
+        <!-- Application Title -->
+        <h1 class="app-title">Weather Forecast</h1>
+
+        <!-- Search Form -->
+        <form class="search-form" method="POST">
+            <input type="text" name="city" placeholder="Enter city name..." class="search-form-input" required>
+            <button type="submit" class="search-form-button neumorphism-card">
+                <i class="fas fa-search"></i> Get Weather
+            </button>
+        </form>
+
+        <!-- Dynamic Content Display Area -->
+        {% if data %}
+        <div class="weather-display neumorphism-card animate-fade-in">
+            {% if data.error %}
+                <p class="error">{{ data.error }}</p>
+            {% else %}
+            <div class="weather-card animate-fade-in">
+                <h2 class="city-name">{{ data['name'] }}</h2>
+                
+                <!-- Dynamic Weather Icon -->
+                <img src="http://openweathermap.org/img/wn/{{ data['weather'][0]['icon'] }}@2x.png" 
+                     alt="Weather Icon"
+                     class="weather-icon animate-pulse-slow">
+                
+                <p class="temperature">{{ data['main']['temp'] }}°C</p>
+                <p class="description">{{ data['weather'][0]['description'] | title }}</p>
+
+                <div class="stats-grid">
+                    <div class="stat-item neumorphism-card">
+                        <i class="fas fa-tint"></i>
+                        <span class="label">Humidity</span><br>
+                        <span class="value">{{ data['main']['humidity'] }}%</span>
+                    </div>
+                    <div class="stat-item neumorphism-card">
+                        <i class="fas fa-wind"></i>
+                        <span class="label">Wind Speed</span><br>
+                        <span class="value">{{ data['wind']['speed'] }} m/s</span>
+                    </div>
+                    <div class="stat-item neumorphism-card">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span class="label">Pressure</span><br>
+                        <span class="value">{{ data['main']['pressure'] }} hPa</span>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
