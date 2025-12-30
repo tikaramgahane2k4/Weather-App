@@ -17,7 +17,7 @@
 
         <!-- Search Form -->
         <form class="search-form" method="POST">
-            <input type="text" name="city" placeholder="Enter city name..." class="search-form-input" required>
+            <input type="text" name="city" placeholder="Enter city name..." class="search-form-input" value="{{ city }}" required>
             <button type="submit" class="search-form-button neumorphism-card">
                 <i class="fas fa-search"></i> Get Weather
             </button>
@@ -65,4 +65,43 @@
     </div>
 
 </body>
+    <!-- Attempt to get device location and auto-submit coordinates; fallback to default city -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const city = "{{ city|e }}";
+            const defaultCity = "{{ default_city|e }}";
+
+            if (!city) {
+                function submitWithCity(name) {
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.style.display = 'none';
+                    const input = document.createElement('input');
+                    input.name = 'city';
+                    input.value = name;
+                    form.appendChild(input);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.style.display = 'none';
+                        const latInput = document.createElement('input'); latInput.name = 'lat'; latInput.value = lat; form.appendChild(latInput);
+                        const lonInput = document.createElement('input'); lonInput.name = 'lon'; lonInput.value = lon; form.appendChild(lonInput);
+                        document.body.appendChild(form);
+                        form.submit();
+                    }, function (err) {
+                        submitWithCity(defaultCity);
+                    }, {timeout: 5000});
+                } else {
+                    submitWithCity(defaultCity);
+                }
+            }
+        });
+    </script>
 </html>
